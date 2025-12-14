@@ -17,16 +17,17 @@ concurrency:
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
+        continue-on-error: true
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -36,4 +37,15 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        continue-on-error: true
+      
+      - name: Check deployment status
+        if: failure()
+        run: |
+          echo "::error::GitHub Pages가 활성화되지 않았습니다."
+          echo "::error::다음 단계를 따라주세요:"
+          echo "::error::1. GitHub 저장소의 Settings > Pages로 이동"
+          echo "::error::2. Source에서 'GitHub Actions' 선택"
+          echo "::error::3. 이 워크플로우를 다시 실행하세요"
+          exit 1
 
