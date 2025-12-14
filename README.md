@@ -7,6 +7,25 @@
 
 🎉 온라인 데모 주소: https://opennana.com/awesome-prompt-gallery/
 
+## 🚀 배포 방법 (GitHub Pages)
+
+이 프로젝트를 GitHub Pages로 배포하려면 다음 단계를 따르세요:
+
+### 1단계: GitHub Pages 활성화
+1. GitHub 저장소로 이동: https://github.com/sellfarmb2b/nanobanana
+2. **Settings** 탭 클릭
+3. 왼쪽 사이드바에서 **Pages** 클릭
+4. **Source** 섹션에서 **GitHub Actions** 선택
+5. 저장
+
+### 2단계: 자동 배포
+- `main` 브랜치에 푸시할 때마다 자동으로 GitHub Pages에 배포됩니다
+- 배포된 사이트: **https://sellfarmb2b.github.io/nanobanana/**
+
+### 배포 상태 확인
+- **Actions** 탭에서 배포 워크플로우 실행 상태를 확인할 수 있습니다
+- 배포가 완료되면 위 주소로 사이트에 접속할 수 있습니다
+
 ## 🆕 프로젝트 개선 사항
 - `scripts/generate-dataset.js`를 추가하여 저장소 내의 Markdown 사례를 자동으로 구조화된 `data/prompts.json` 데이터셋으로 파싱합니다. 출처, 이미지, 프롬프트, 예시, 참고사항 및 자동 생성된 분류 태그를 포함합니다.
 - 새로운 프론트엔드 페이지(`index.html` + `assets/`)를 제공하며, 갤러리 탐색, 태그 필터링, 키워드 검색, 사례 상세 보기 및 프롬프트 원클릭 복사를 지원합니다.

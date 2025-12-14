@@ -18,16 +18,12 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        continue-on-error: true
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -37,15 +33,34 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Check deployment status
+      - name: Deployment URL
+        if: success()
+        run: |
+          echo "✅ 배포 성공!"
+          echo "🌐 사이트 URL: https://sellfarmb2b.github.io/nanobanana/"
+      
+      - name: Setup Instructions
         if: failure()
         run: |
-          echo "::error::GitHub Pages가 활성화되지 않았습니다."
-          echo "::error::다음 단계를 따라주세요:"
-          echo "::error::1. GitHub 저장소의 Settings > Pages로 이동"
-          echo "::error::2. Source에서 'GitHub Actions' 선택"
-          echo "::error::3. 이 워크플로우를 다시 실행하세요"
+          echo "::error::❌ GitHub Pages가 활성화되지 않았습니다."
+          echo ""
+          echo "📋 다음 단계를 따라주세요:"
+          echo ""
+          echo "1️⃣  GitHub 저장소로 이동:"
+          echo "   https://github.com/sellfarmb2b/nanobanana"
+          echo ""
+          echo "2️⃣  Settings 탭 클릭"
+          echo ""
+          echo "3️⃣  왼쪽 사이드바에서 'Pages' 클릭"
+          echo ""
+          echo "4️⃣  'Source' 섹션에서 'GitHub Actions' 선택"
+          echo ""
+          echo "5️⃣  저장 후 이 워크플로우를 다시 실행하세요"
+          echo ""
+          echo "🔗 직접 링크:"
+          echo "   https://github.com/sellfarmb2b/nanobanana/settings/pages"
           exit 1
 
